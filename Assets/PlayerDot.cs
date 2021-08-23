@@ -4,12 +4,15 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 
+/// <summary>
+/// Main game functionality is implemented in this class.
+/// </summary>
 public class PlayerDot : MonoBehaviour 
 {    
     public float upForce = 10f;
     public Rigidbody2D playerDot;
     public string currentColor;
-    public SpriteRenderer sr;
+    public SpriteRenderer spriteRenderer;
 
     public Color violet;
     public Color blue;
@@ -20,7 +23,7 @@ public class PlayerDot : MonoBehaviour
     public TMP_Text scoreText;
     public static int deaths = -1;
     public TMP_Text deathsNumberText;
-    public TMP_Text gameOver;
+    public TMP_Text gameOverText;
 
     public GameObject[] obstacles;
     public GameObject colorSwitcher;
@@ -29,7 +32,8 @@ public class PlayerDot : MonoBehaviour
     public GameObject starCollected;
 
     private bool isGameOver = false;
-
+    
+    // Initialisation: setup ball's color and increase deapths counter.
     void Start() 
     {
         SetRandomeColor();
@@ -37,13 +41,14 @@ public class PlayerDot : MonoBehaviour
         deathsNumberText.text = "Deaths: " + deaths.ToString();
     }
 
+    // Ball's movements and ending game verification.
     void Update() 
     { 
         if (Input.GetMouseButtonDown(0) && !isGameOver) 
         {
             playerDot.velocity = Vector2.up * upForce;
         }
-
+        // End game if ball is not visible.
         if (playerDot.position.y < Camera.main.transform.position.y - 5)
         {
             Debug.Log("GAME OVER!");
@@ -55,8 +60,10 @@ public class PlayerDot : MonoBehaviour
 
     }
 
+    // Ball's collision behaviour. 
     private void OnTriggerEnter2D(Collider2D collision) 
     {   
+        // Collision with color switcher.
         if (collision.tag == "ColorSwitcher")
         {
             SetRandomeColor();
@@ -67,6 +74,7 @@ public class PlayerDot : MonoBehaviour
             return;
         }
 
+        // Collision with the white star.
         if (collision.tag == "WhiteStar")
         {
             score ++;
@@ -78,6 +86,7 @@ public class PlayerDot : MonoBehaviour
             return;        
          }
 
+        // Game should be ended when ball and obsticle have different colors.
         if (collision.tag != currentColor)
         {
             Debug.Log("GAME OVER!");
@@ -87,6 +96,7 @@ public class PlayerDot : MonoBehaviour
         }
      }
 
+    // Ball's color setup.
     void SetRandomeColor()
     {
         string prevColor = currentColor;
@@ -98,30 +108,32 @@ public class PlayerDot : MonoBehaviour
             {
                 case 0:
                     currentColor = "Violet";
-                    sr.color = violet;
+                    spriteRenderer.color = violet;
                     break;
                 case 1:
                     currentColor = "Blue";
-                    sr.color = blue;
+                    spriteRenderer.color = blue;
                     break;
                 case 2:
                     currentColor = "Red";
-                    sr.color = red;
+                    spriteRenderer.color = red;
                     break;
                 case 3:
                     currentColor = "Green";
-                    sr.color = green;
+                    spriteRenderer.color = green;
                     break;
             } 
         } while (currentColor == prevColor);
     }
 
+    // Delay for the scene update.
     void Delay ()
     {   
-        gameOver.text = "GAME OVER! Press the left mouse button to contunie";
+        gameOverText.text = "GAME OVER! Press the left mouse button to contunie";
+        // Player will be able to restart the game by pressing the left mouse button.
         if (Input.GetMouseButtonDown(0)) 
         {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
  }

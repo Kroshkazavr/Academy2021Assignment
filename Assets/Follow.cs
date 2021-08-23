@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Class with logic for camera's behaviour.
+/// </summary>
 public class Follow : MonoBehaviour
 {
     public Transform playerDot;
