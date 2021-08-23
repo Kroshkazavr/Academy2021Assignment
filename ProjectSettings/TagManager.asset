@@ -10,6 +10,7 @@ TagManager:
   - Green
   - ColorSwitcher
   - WhiteStar
+  - PlayerDot
   layers:
   - Default
   - TransparentFX
@@ -49,4 +50,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 701592153
+    locked: 0
+  - name: HUD
+    uniqueID: 2173974987
     locked: 0

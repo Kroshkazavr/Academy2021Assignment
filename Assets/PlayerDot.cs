@@ -18,6 +18,9 @@ public class PlayerDot : MonoBehaviour
 
     public static int score = 0;
     public TMP_Text scoreText;
+    public static int deaths = -1;
+    public TMP_Text deathsNumberText;
+    public TMP_Text gameOver;
 
     public GameObject[] obstacles;
     public GameObject colorSwitcher;
@@ -30,6 +33,8 @@ public class PlayerDot : MonoBehaviour
     void Start() 
     {
         SetRandomeColor();
+        deaths ++;
+        deathsNumberText.text = "Deaths: " + deaths.ToString();
     }
 
     void Update() 
@@ -56,20 +61,20 @@ public class PlayerDot : MonoBehaviour
         {
             SetRandomeColor();
             Destroy(collision.gameObject);
-            Instantiate(colorSwitcher, new Vector2(transform.position.x, transform.position.y + 10f), transform.rotation);
+
+            int randomIndex = Random.Range(0, 2);
+            Instantiate(obstacles[randomIndex], new Vector2(transform.position.x, transform.position.y + 5f), transform.rotation);
             return;
         }
 
         if (collision.tag == "WhiteStar")
         {
             score ++;
-            scoreText.text = score.ToString();
+            scoreText.text = "Score: " + score.ToString();
 
             Destroy(collision.gameObject);
             Instantiate(starCollected, new Vector2(transform.position.x, transform.position.y), transform.rotation);
-            
-            int randomIndex = Random.Range(0, 2);
-            Instantiate(obstacles[randomIndex], new Vector2(transform.position.x, transform.position.y + 10f), transform.rotation);
+            Instantiate(colorSwitcher, new Vector2(transform.position.x, transform.position.y + 5f), transform.rotation);
             return;        
          }
 
@@ -78,7 +83,6 @@ public class PlayerDot : MonoBehaviour
             Debug.Log("GAME OVER!");
             isGameOver = true;
             Instantiate(playerDeath, new Vector2(transform.position.x, transform.position.y), transform.rotation);
-            score = 0;
             Invoke("Delay", 1f);     
         }
      }
@@ -113,7 +117,11 @@ public class PlayerDot : MonoBehaviour
     }
 
     void Delay ()
-    {
+    {   
+        gameOver.text = "GAME OVER! Press the left mouse button to contunie";
+        if (Input.GetMouseButtonDown(0)) 
+        {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
  }
