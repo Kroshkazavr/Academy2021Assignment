@@ -402,6 +402,7 @@ MonoBehaviour:
   green: {r: 0.15686275, g: 0.8666667, b: 0, a: 1}
   scoreText: {fileID: 67523508}
   deathsNumberText: {fileID: 764516346}
+  gameOver: {fileID: 985379608}
   obstacles:
   - {fileID: 943638806892994467, guid: 2b9f97c678e68844582977351670caf3, type: 3}
   - {fileID: 8030944919309516267, guid: 368d849321e21904da3cfbe4b1efa425, type: 3}
@@ -673,7 +674,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -7, y: 84}
+  m_AnchoredPosition: {x: 0, y: -91}
   m_SizeDelta: {x: 94.380005, y: 44.20999}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &985379608
@@ -696,9 +697,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'GAME OVER!
-
-    press the left mouse button to contunie'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
   m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
@@ -725,7 +724,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24.35
+  m_fontSize: 26
   m_fontSizeBase: 26
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -761,7 +760,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -161.58417, y: 0, z: -175.10689, w: -30.164957}
+  m_margin: {x: -161.58417, y: 0, z: -165.69194, w: -30.164957}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
